@@ -4,18 +4,17 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: vue-frontend
+      dockerfile: dockerfile
+    container_name: llm-meter-web
     ports:
-      - "8080:80"     # 宿主机 8080 -> 容器 80
+      - "3000:3000"
     depends_on:
-      - backend 
+      - llm-meter-backend 
     networks:
       - app-network
     restart: unless-stopped
   llm-meter-backend:
-    image: my-backend:latest
-    container_name: vue-backend
+    image: docker.v2.aispeech.com/aispeech/llm-meter:v0.0.1
     expose:
       - "15001"
     networks:

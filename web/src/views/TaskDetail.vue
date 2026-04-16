@@ -21,7 +21,8 @@
       <div v-loading="loading">
         <el-descriptions title="基本信息" :column="3" border>
           <el-descriptions-item label="任务ID">{{ taskInfo.id }}</el-descriptions-item>
-          <el-descriptions-item label="模型">{{ taskInfo.model }}</el-descriptions-item>
+          <el-descriptions-item label="模型">{{ taskInfo.resource }}</el-descriptions-item>
+          <el-descriptions-item label="模型ID">{{ taskInfo.model }}</el-descriptions-item>
           <el-descriptions-item label="数据集">{{ taskInfo.dataset }}</el-descriptions-item>
           <el-descriptions-item label="并发数">{{ taskInfo.parallel }}</el-descriptions-item>
           <el-descriptions-item label="请求数">{{ taskInfo.number }}</el-descriptions-item>

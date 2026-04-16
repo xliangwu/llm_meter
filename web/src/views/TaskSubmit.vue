@@ -22,6 +22,10 @@
           <el-input v-model="taskForm.model" placeholder="请输入模型名称" />
         </el-form-item>
 
+        <el-form-item label="资源名字" prop="resource">
+          <el-input v-model="taskForm.resource" placeholder="Qwen/Qwen3.5-27B-FP8" />
+        </el-form-item>
+
         <el-form-item label="数据集" prop="dataset">
           <el-select v-model="taskForm.dataset" placeholder="请选择数据集" style="width: 100%;">
             <el-option label="random" value="random" />
@@ -175,7 +179,8 @@ const taskForm = ref({
   stream: true,
   temperature: 0.0,
   api_key: '',
-  name: null
+  name: null,
+  resource: null
 })
 
 const rules = {
@@ -245,6 +250,7 @@ const handleReset = () => {
     temperature: 0.0,
     api_key: '',
     name: '',
+    resource: '',
     extraArgs: ''
   }
 }

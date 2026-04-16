@@ -1,26 +1,30 @@
 version: '3.8'
 
 services:
-  frontend:
+  llm-meter-web:
     build:
       context: .
       dockerfile: dockerfile
     container_name: llm-meter-web
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
-      - llm-meter-backend 
+      - llm_meter_api
     networks:
       - app-network
     restart: unless-stopped
-  llm-meter-backend:
+  llm_meter_api:
     image: docker.v2.aispeech.com/aispeech/llm-meter:v0.0.1
+    container_name: llm-meter-api
     expose:
       - "15001"
     networks:
       - app-network
     environment:
       - NODE_ENV=production
+    volumes:
+      - /data/users/xueliang.wu/app_data/llm_meter/datasets:/datasets
+      - /data/users/xueliang.wu/app_data/llm_meter/outputs:/outputs
     restart: unless-stopped
 networks:
   app-network:

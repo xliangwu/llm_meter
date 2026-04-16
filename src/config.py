@@ -14,4 +14,5 @@ class Config:
     MYSQL_DB = os.environ.get("MYSQL_DB", "llm_benchmark")
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}?charset=utf8"
 
-    OUTPUTS_DIR = os.environ.get("TASK_OUTPUT", "datasets")
+    OUTPUTS_DIR = os.environ.get("TASK_OUTPUT", "outputs")
+    DATASETS_DIR = os.environ.get("DATASETS", "datasets")

@@ -18,6 +18,7 @@ class Task(db.Model):
     status = db.Column(db.String(20), default='pending')
     output_path = db.Column(db.String(512), nullable=True)
     extra_args = db.Column(db.Text, nullable=True)
+    resource = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=True)
     completed_at = db.Column(db.DateTime, nullable=True)
@@ -35,6 +36,7 @@ class Task(db.Model):
             'status': self.status,
             'output_path': self.output_path,
             'extra_args': self.extra_args,
+            'resource': self.resource,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None,
             'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S') if self.updated_at else None,
             'completed_at': self.completed_at.strftime('%Y-%m-%d %H:%M:%S') if self.completed_at else None

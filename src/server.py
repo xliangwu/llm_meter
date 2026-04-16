@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 import os
+import shutil
 import uuid
 from werkzeug.utils import secure_filename
 
@@ -152,6 +153,7 @@ def create_task():
         "number",
         "max_tokens",
         "name",
+        "resource",
     ]
     for key, value in data.items():
         if key not in exclude_fields and value is not None:
@@ -166,6 +168,7 @@ def create_task():
         parallel=data.get("parallel", 1),
         number=data.get("number", 10),
         max_tokens=data.get("max_tokens", 1024),
+        resource=data.get("resource"),
         extra_args=json.dumps(extra_args) if extra_args else None,
         status="pending",
     )
@@ -184,6 +187,9 @@ def delete_task(task_id):
 
     if not task:
         return jsonify({"error": "Task not found"}), 404
+
+    if task.output_path and os.path.exists(task.output_path):
+        shutil.rmtree(task.output_path)
 
     db.session.delete(task)
     db.session.commit()
@@ -207,7 +213,7 @@ def upload_dataset():
     if not dataset_name:
         return jsonify({"error": "dataset_name is required"}), 400
 
-    datasets_dir = os.path.join(Config.OUTPUTS_DIR)
+    datasets_dir = os.path.join(Config.DATASETS_DIR)
     os.makedirs(datasets_dir, exist_ok=True)
 
     filename = secure_filename(file.filename)
@@ -236,9 +242,9 @@ def upload_dataset():
 def get_datasets():
     page = int(request.args.get("page", 1))
     page_size = int(request.args.get("page_size", 10))
-    
+
     query = Dataset.query
-    
+
     total = query.count()
     datasets = (
         query.order_by(Dataset.created_at.desc())
@@ -246,7 +252,7 @@ def get_datasets():
         .limit(page_size)
         .all()
     )
-    
+
     return jsonify(
         {
             "data": [dataset.to_dict() for dataset in datasets],
@@ -274,4 +280,4 @@ def delete_dataset(dataset_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=15001)
+    app.run(debug=False, host="0.0.0.0", port=15001)

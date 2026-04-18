@@ -1,105 +1,105 @@
-# LLM Benchmark - 大模型推理性能压测平台
+# LLM Benchmark - LLM Inference Performance Benchmark Platform
 
-一个专业的 LLM 推理性能测试平台，支持对大模型推理服务进行全面的性能压测和分析。
+A professional LLM inference performance testing platform that enables comprehensive performance benchmarking and analysis for large language model inference services.
 
-## 项目简介
+## Project Introduction
 
-LLM Benchmark 是一个基于 Vue 3 + Element Plus + Flask + MySQL 构建的全栈性能测试平台，专为评估大语言模型推理服务而设计。
+LLM Benchmark is a full-stack performance testing platform built with Vue 3 + Element Plus + Flask + MySQL, specifically designed for evaluating large language model inference services.
 
-## 核心功能
+## Core Features
 
-### 1. 任务管理
-- ✅ 创建性能测试任务
-- ✅ 异步执行测试任务（多线程）
-- ✅ 实时查看任务状态
-- ✅ 按任务名称和状态过滤
-- ✅ 分页显示任务列表
+### 1. Task Management
+- ✅ Create performance testing tasks
+- ✅ Asynchronous task execution (multi-threading)
+- ✅ Real-time task status monitoring
+- ✅ Filter tasks by name and status
+- ✅ Pagination for task list
 
-### 2. 性能测试
-- ✅ 支持多种数据集（random、line_by_line、sharegpt、custom）
-- ✅ 可配置并发数和请求数
-- ✅ 支持流式输出测试
-- ✅ 自定义温度、Token 数等参数
+### 2. Performance Testing
+- ✅ Support multiple datasets (random, line_by_line, sharegpt, custom)
+- ✅ Configurable concurrency and request count
+- ✅ Support streaming output testing
+- ✅ Customizable parameters like temperature, token count, etc.
 
-### 3. 结果分析
-- ✅ 查看任务基本信息
-- ✅ 查看性能报告（文本格式）
-- ✅ 查看详细任务日志
-- ✅ 查看可视化统计报告（HTML 格式，样式隔离）
+### 3. Result Analysis
+- ✅ View basic task information
+- ✅ View performance report (text format)
+- ✅ View detailed task logs
+- ✅ View visualized statistical report (HTML format, style isolated)
 
-### 4. 任务状态
-- pending: 待执行
-- running: 执行中
-- completed: 已完成
-- failed: 失败
+### 4. Task Status
+- pending: Pending execution
+- running: Running
+- completed: Completed
+- failed: Failed
 
-## 技术栈
+## Tech Stack
 
-### 前端
+### Frontend
 - Vue 3 (Composition API)
 - Element Plus
 - Vite
 - Vue Router 4
 - Axios
 
-### 后端
+### Backend
 - Flask
 - Flask-SQLAlchemy
 - MySQL
-- Threading（异步任务）
+- Threading (asynchronous tasks)
 - python-dotenv
 
-### 性能测试
+### Performance Testing
 - evalscope
 
-## 项目结构
+## Project Structure
 
 ```
 llm_meter/
-├── src/                    # 后端源码
-│   ├── server.py          # Flask 主服务
-│   ├── models.py          # 数据库模型
-│   ├── tasks.py           # 异步任务
-│   ├── config.py          # 配置文件
-│   └── init_db.py         # 数据库初始化
-├── web/                    # 前端源码
+├── src/                    # Backend source code
+│   ├── server.py          # Flask main server
+│   ├── models.py          # Database models
+│   ├── tasks.py           # Asynchronous tasks
+│   ├── config.py          # Configuration
+│   └── init_db.py         # Database initialization
+├── web/                    # Frontend source code
 │   ├── src/
-│   │   ├── views/         # 页面组件
-│   │   ├── utils/         # 工具函数
-│   │   └── router/        # 路由配置
+│   │   ├── views/         # Page components
+│   │   ├── utils/         # Utility functions
+│   │   └── router/        # Route configuration
 │   ├── index.html
 │   └── package.json
-├── outputs/                # 任务输出目录
-├── requirements.txt        # Python 依赖
-└── .env                   # 环境变量配置
+├── outputs/                # Task output directory
+├── requirements.txt        # Python dependencies
+└── .env                   # Environment variables
 ```
 
-## 快速开始
+## Quick Start
 
-### 环境要求
+### Requirements
 
 - Python >= 3.7
 - Node.js >= 16.0.0
 - MySQL >= 5.7
 
-### 1. 安装依赖
+### 1. Install Dependencies
 
 ```bash
-# Python 依赖
+# Python dependencies
 pip install -r requirements.txt
 
-# 前端依赖
+# Frontend dependencies
 cd web
 npm install
 ```
 
-### 2. 配置数据库
+### 2. Configure Database
 
 ```sql
 CREATE DATABASE llm_benchmark CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-创建 `.env` 文件：
+Create `.env` file:
 
 ```bash
 MYSQL_HOST=localhost
@@ -110,58 +110,58 @@ MYSQL_DB=llm_benchmark
 TASK_OUTPUT=outputs
 ```
 
-### 3. 初始化数据库
+### 3. Initialize Database
 
 ```bash
 cd src
 python init_db.py
 ```
 
-### 4. 启动服务
+### 4. Start Services
 
 ```bash
-# 后端服务
+# Backend service
 cd src
 python server.py
 
-# 前端服务（另一个终端）
+# Frontend service (in another terminal)
 cd web
 npm run dev
 ```
 
-### 5. 访问应用
+### 5. Access the Application
 
-打开浏览器访问: http://localhost:3000
+Open your browser and visit: http://localhost:3000
 
-## 使用指南
+## Usage Guide
 
-### 创建测试任务
+### Create a Test Task
 
-1. 点击"提交新任务"
-2. 填写任务参数（模型、数据集、URL、并发数等）
-3. 点击"提交任务"
+1. Click "Submit New Task"
+2. Fill in task parameters (model, dataset, URL, concurrency, etc.)
+3. Click "Submit Task"
 
-### 查看任务详情
+### View Task Details
 
-1. 在任务列表中点击"查看详情"
-2. 查看三个标签页：
-   - 性能报告：文本格式的性能摘要
-   - 任务日志：详细的执行日志
-   - 数据统计：可视化的性能统计报告
+1. Click "View Details" in the task list
+2. Three tabs available:
+   - Performance Report: Text format performance summary
+   - Task Log: Detailed execution logs
+   - Statistics: Visual performance statistics report
 
-## API 接口
+## API Endpoints
 
-- GET /api/tasks - 获取任务列表
-- GET /api/tasks/<id> - 获取任务详情
-- GET /api/tasks/<id>/log - 获取任务日志
-- GET /api/tasks/<id>/summaryLog - 获取性能报告
-- GET /api/tasks/<id>/stats - 获取统计数据
-- POST /api/tasks - 创建任务
-- DELETE /api/tasks/<id> - 删除任务
+- GET /api/tasks - Get task list
+- GET /api/tasks/<id> - Get task details
+- GET /api/tasks/<id>/log - Get task log
+- GET /api/tasks/<id>/summaryLog - Get performance report
+- GET /api/tasks/<id>/stats - Get statistics data
+- POST /api/tasks - Create task
+- DELETE /api/tasks/<id> - Delete task
 
-## 生产部署
+## Production Deployment
 
-### 使用 Gunicorn
+### Using Gunicorn
 
 ```bash
 pip install gunicorn
@@ -169,20 +169,24 @@ cd src
 gunicorn -w 4 -b 0.0.0.0:15001 server:app
 ```
 
-### 构建前端
+### Build Frontend
 
 ```bash
 cd web
 npm run build
 ```
 
-## 注意事项
+## Notes
 
-1. 确保 MySQL 服务已启动
-2. .env 文件必须放在项目根目录
-3. 确保端口 3000 和 15001 未被占用
-4. 定期清理 outputs 目录下的旧任务数据
+1. Ensure MySQL service is started
+2. .env file must be placed in the project root directory
+3. Ensure ports 3000 and 15001 are not occupied
+4. Periodically clean up old task data in the outputs directory
 
-## 许可证
+## License
 
 MIT License
+
+---
+
+[中文说明](./README.zh-CN.md)

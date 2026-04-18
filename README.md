@@ -1,5 +1,7 @@
 # LLM Benchmark - LLM Inference Performance Benchmark Platform
 
+English | [中文](./README.zh-CN.md)
+
 A professional LLM inference performance testing platform that enables comprehensive performance benchmarking and analysis for large language model inference services.
 
 ## Project Introduction
@@ -186,7 +188,3 @@ npm run build
 ## License
 
 MIT License
-
----
-
-[中文说明](./README.zh-CN.md)
